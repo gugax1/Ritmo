@@ -1,1 +1,24 @@
-# Ritmo — piloto\n\nNext.js App Router, Supabase Auth e Postgres com RLS.\n\nRotas: / (comercial), /app (autenticação e painel), /privacidade.\n\nInstalar: npm install. Rodar: npm run dev. Build: npm run build.\n\nBanco: database/schema.sql já aplicado no projeto axcdabttoxukssewrqiz. Apenas chave publicável no cliente. Sessão na memória da aba.\n\nDisponível: cadastro de proprietário/academia, alunos, importação CSV simples validada em lote, edição de status/consentimentos, pagamentos, presenças, cobertura de registros, regras e simulação no banco.\n\nPendências antes de produção: permissões por função/equipe, recuperação de senha e sessões persistentes, fila e worker de envio com revalidação transacional de pagamento e opt-out, integração Meta WhatsApp e templates aprovados, webhook assinado e idempotente, cron, testes E2E e concorrência, backup/restauração, observabilidade e canal formal de suporte/privacidade. Não há envio real.\n\nO efeito de vidro do web é CSS apenas nas barras e botões; expo-glass-effect pertence ao app nativo iOS.\n\nNão declarar produção pronta ou teste E2E aprovado somente por build.
+# Ritmo — piloto
+Landing page e plataforma Next.js com Supabase Auth e banco Postgres com RLS.
+
+## Acesso
+- Site: https://ritmo-digital.vercel.app
+- Sistema: https://ritmo-digital.vercel.app/app
+
+## Desenvolvimento
+`npm install`, `npm run dev`. Build: `npm run build`.
+Para os testes: `npm install --no-save playwright`, `npx playwright install --with-deps chromium`, inicie `npm run start` e execute `node tests/flow.cjs`.
+
+## Validação de 16/11/2026
+Build com Next 16.4.6 / React 19.3.1 aprovado. Auditoria das dependências de produção sem vulnerabilidades conhecidas.
+Playwright: página inicial, largura 390px, cadastro, nome de usuário, senha visível, senhas divergentes, estado de e-mail pendente com resposta simulada, demonstração e navegação.
+E2E com conta real isolada no Supabase: login, academia, aluno, pagamento, regra, simulação, confirmação de pagamento e sessão após recarga. A conta e os dados de teste foram removidos.
+A entrega de confirmação por e-mail não foi testada ponta a ponta; exige configuração de SMTP e URLs no Supabase.
+
+## Estado do produto
+O modo real salva registros no banco, mas as automações são simulações. Sem envios reais, webhooks ou agendamento automático. O nome de usuário é de exibição; login por e-mail.
+O vidro web é CSS em barras e botões. expo-glass-effect é destinado ao aplicativo nativo iOS.
+
+## Configuração necessária
+Supabase Auth: configure a Site URL e Redirect URLs para https://ritmo-digital.vercel.app/app e SMTP próprio. Não exponha credenciais de servidor.
+Banco: database/schema.sql é a migration aplicada no projeto, com isolamento por academia e regras de simulação.
