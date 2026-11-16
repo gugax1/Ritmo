@@ -1,0 +1,1 @@
+export default function sitemap(){return ['','/privacidade'].map(p=>({url:'https://ritmo-digital.vercel.app'+p,lastModified:new Date()}))}
