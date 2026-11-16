@@ -1,0 +1,1 @@
+export default function robots(){return {rules:{userAgent:'*',allow:'/',disallow:'/app'},sitemap:'https://ritmo-digital.vercel.app/sitemap.xml'}}
